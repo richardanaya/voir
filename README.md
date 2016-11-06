@@ -6,7 +6,7 @@ npm:
 ```npm install voir```
 
 CDN:
-```<script src="https://unpkg.com/voir@1.0.0/voir.js"></script>
+```<script src="https://unpkg.com/voir@1.0.0/voir.js"></script>```
 
 # Usage
 
