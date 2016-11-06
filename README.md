@@ -36,6 +36,9 @@ function counterMutations(state,action){
   		case "decrement":
         state.counter -= 1
         return;
+  		case "change":
+        state.counter = action.data.number;
+        return;        
     }
   }
 ```
@@ -58,7 +61,7 @@ Now lets connect our Vue instance to the store so that any actions that come fro
 
 ```html
 <div id="demo">
-      {{state.counter}}<button>+</button><button>-</button>
+      {{state.counter}}<button>+</button><button>-</button><button>Reset</button>
 </div>
 ```
 ```javascript
@@ -80,6 +83,7 @@ Let's make it easy for our view to dispatch actions. We use another mixin that m
       {{state.counter}}
       <button v-on:click="action('increment')">+</button>
       <button v-on:click="action('decrement')">-</button>
+      <button v-on:click="action('change',{number:0})">Reset</button>
 </div>
 ```
 ```javascript
@@ -105,6 +109,7 @@ var demo = new Vue({
       <p>{{state.counter}}</p>
       <button v-on:click="action('increment')">+</button>
       <button v-on:click="action('decrement')">-</button>
+      <button v-on:click="action('change',{number:0})">-</button>
   </div>
 </body>
 <script>
