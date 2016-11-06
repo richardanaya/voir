@@ -26,10 +26,10 @@ Next lets focus on the types of mutations we want to perform on this state.  In 
 function counterMutations(state,action){
   	switch(action.type){
     	case "increment":
-      	state.counter += 1
+        state.counter += 1
         return;
   		case "decrement":
-      	state.counter -= 1
+        state.counter -= 1
         return;
     }
   }
