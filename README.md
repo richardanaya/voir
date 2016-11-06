@@ -1,6 +1,6 @@
 # Voir
 
-Voir is an incredibly simple store for keeping your mutations seperate from your view components in Vue. 
+Voir is an incredibly simple store for keeping your mutations separate from your view components in Vue. 
 
 ##Install
 
