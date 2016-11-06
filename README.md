@@ -76,7 +76,7 @@ var demo = new Vue({
 
 ### Dispatching actions
 
-Let's make it easy for our view to dispatch actions. We use another mixin that makes it easy to emit actions from your component:
+Let's make it easy for our view to dispatch actions. We use another mixin lets you emit actions from your component:
 
 ```html
 <div id="demo">
