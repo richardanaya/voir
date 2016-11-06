@@ -96,7 +96,7 @@ var demo = new Vue({
 <html>
 <head>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.5/vue.min.js"></script>
-  <script src="voir.js"></script>
+  <script src="https://unpkg.com/voir@1.0.0/voir.js"></script>
 </head>
 <body>
   <div id="demo">
