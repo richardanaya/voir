@@ -1,0 +1,16 @@
+{
+  "name": "voir",
+  "version": "1.0.0",
+  "description": "A simple store for VueJS",
+  "main": "voir.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/richardanaya/voir.git"
+  },
+  "author": "Richard Anaya",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/richardanaya/voir/issues"
+  },
+  "homepage": "https://github.com/richardanaya/voir#readme"
+}
