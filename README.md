@@ -117,9 +117,7 @@ var demo = new Vue({
     }
   }
 
-  var store = Voir.createStore(
-  							{ counter: 0 },
-                counterMutations);
+  var store = Voir.createStore({ counter: 0 }, counterMutations);
 
   var demo = new Vue({
       el: '#demo',
