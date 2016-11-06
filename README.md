@@ -3,10 +3,14 @@
 #Install
 
 npm:
-```npm install voir```
+```bash
+npm install voir
+```
 
 CDN:
-```<script src="https://unpkg.com/voir@1.0.0/voir.js"></script>```
+```html
+<script src="https://unpkg.com/voir@1.0.0/voir.js"></script>
+```
 
 # Usage
 
