@@ -14,7 +14,10 @@ CDN:
 
 # Usage
 
-We're going to create a simple counter application.  Let's start by creating the state for our app.
+We're going to create a simple counter application.  
+
+### Make a store
+Let's start by creating the state for our app.
 
 ```javascript
 var state = { counter: 0 };
@@ -47,3 +50,21 @@ it's easy to add more mutation handlers if we want them
 var store = Voir.createStore(state,counterMutations,otherMutationHandler,...);
 ```
 
+### Connect store to Vue
+
+It's easy to connect our store to our Vue
+
+```html
+<div id="demo">
+      {{state.counter}}<button>+</button><button>-</button>
+</div>
+```
+```javascript
+var demo = new Vue({
+    el: '#demo',
+    mixins: [Voir.StoreMixin(store)],
+    data:{
+      state: store.state
+    }
+})
+```
