@@ -1,6 +1,8 @@
 # Voir
 
-#Install
+Voir is an incredibly simple store for keeping your mutations seperate from your view components in Vue. 
+
+##Install
 
 npm:
 ```bash
@@ -12,7 +14,7 @@ CDN:
 <script src="https://unpkg.com/voir@1.0.0/voir.js"></script>
 ```
 
-# Usage
+## Usage
 
 We're going to create a simple counter application.  
 
