@@ -1,6 +1,6 @@
 # Voir
 
-Voir is an incredibly simple store for keeping your mutations separate from your view components in Vue. 
+Voir is an incredibly simple store for keeping your mutations separate from your view components in Vue.
 
 ##Install
 
@@ -11,7 +11,7 @@ npm install voir
 
 CDN:
 ```html
-<script src="https://unpkg.com/voir@1.0.0/voir.js"></script>
+<script src="https://unpkg.com/voir@latest/voir.js"></script>
 ```
 
 ## Usage
@@ -102,14 +102,14 @@ var demo = new Vue({
 <html>
 <head>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.5/vue.min.js"></script>
-  <script src="https://unpkg.com/voir@1.0.0/voir.js"></script>
+  <script src="https://unpkg.com/voir@latest/voir.js"></script>
 </head>
 <body>
   <div id="demo">
       <p>{{state.counter}}</p>
       <button v-on:click="action('increment')">+</button>
       <button v-on:click="action('decrement')">-</button>
-      <button v-on:click="action('change',{number:0})">-</button>
+      <button v-on:click="action('change',{number:0})">Reset</button>
   </div>
 </body>
 <script>
