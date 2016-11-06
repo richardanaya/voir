@@ -121,6 +121,9 @@ var demo = new Vue({
   		case "decrement":
       	state.counter -= 1
         return;
+  		case "change":
+        state.counter = action.data.number;
+        return;        
     }
   }
 
