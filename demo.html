@@ -1,7 +1,7 @@
 <html>
 <head>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.5/vue.min.js"></script>
-  <script src="https://unpkg.com/voir@latest/voir.js"></script>
+  <script src="voir.js"></script>
 </head>
 <body>
   <div id="demo">
@@ -15,22 +15,23 @@
   function counterMutations(state,action){
     switch(action.type){
         case "increment":
-        state.counter += 1
-        return;
+          state.counter += 1
+          return;
         case "decrement":
-        state.counter -= 1
-        return;
+          state.counter -= 1
+          return;
         case "change":
-        state.counter = action.data.number;
-        return;
+          state.counter = action.data.number;
+          return;
     }
   }
 
   var store = Voir.createStore({ counter: 0 }, counterMutations);
 
+  Vue.use(Voir,{store:store});
+
   var demo = new Vue({
       el: '#demo',
-        mixins: [Voir.StoreMixin(store),Voir.ActionMixin],
       data:{
         state: store.state
       }

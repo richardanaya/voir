@@ -8,24 +8,20 @@
   }
 }(this, function () {
     return {
-      StoreMixin : function(store){
-        return {
+      install: function(Vue, options){
+        Vue.mixin({
           created: function(){
-            this.$on("action",function(d){
-      				store.dispatchAction(d);
-            })
+            if(this.$root === this){
+              this.$on("action",function(d){
+        				store.dispatchAction(d);
+              });
+            }
           }
-        };
-      },
-
-      ActionMixin : {
-        methods: {
-          action: function (name,data) {
-            this.$emit("action",{type:name,data:data});
-          }
+        })
+        Vue.prototype.action = function (name,data) {
+          this.$emit("action",{type:name,data:data});
         }
       },
-
       createStore: function(){
       	var initialState = arguments[0];
       	var mutators = [];

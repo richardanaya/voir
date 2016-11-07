@@ -65,9 +65,10 @@ Now lets connect our Vue instance to the store so that any actions that come fro
 </div>
 ```
 ```javascript
+Vue.use(Voir,{store:store});
+
 var demo = new Vue({
     el: '#demo',
-    mixins: [Voir.StoreMixin(store)],
     data:{
       state: store.state
     }
@@ -76,7 +77,7 @@ var demo = new Vue({
 
 ### Dispatching actions
 
-Let's make it easy for our view to dispatch actions. We use another mixin lets you emit actions from your component:
+Dispatching actions in Voir is easy:
 
 ```html
 <div id="demo">
@@ -89,7 +90,6 @@ Let's make it easy for our view to dispatch actions. We use another mixin lets y
 ```javascript
 var demo = new Vue({
     el: '#demo',
-    mixins: [Voir.StoreMixin(store),Voir.ActionMixin],
     data:{
       state: store.state
     }
@@ -114,26 +114,27 @@ var demo = new Vue({
 </body>
 <script>
   function counterMutations(state,action){
-  	switch(action.type){
-    	case "increment":
-      	state.counter += 1
-        return;
-  		case "decrement":
-      	state.counter -= 1
-        return;
-  		case "change":
-        state.counter = action.data.number;
-        return;        
+    switch(action.type){
+        case "increment":
+          state.counter += 1
+          return;
+        case "decrement":
+          state.counter -= 1
+          return;
+        case "change":
+          state.counter = action.data.number;
+          return;
     }
   }
 
   var store = Voir.createStore({ counter: 0 }, counterMutations);
 
+  Vue.use(Voir,{store:store});
+
   var demo = new Vue({
       el: '#demo',
-    	mixins: [Voir.StoreMixin(store),Voir.ActionMixin],
       data:{
-      	state: store.state
+        state: store.state
       }
   })
 </script>
