@@ -66,7 +66,6 @@ Now lets connect our Vue instance to the store so that any actions that come fro
 ```
 ```javascript
 Vue.use(Voir,{store:store});
-
 var demo = new Vue({
     el: '#demo',
     data:{
@@ -88,6 +87,7 @@ Dispatching actions in Voir is easy:
 </div>
 ```
 ```javascript
+Vue.use(Voir,{store:store});
 var demo = new Vue({
     el: '#demo',
     data:{
