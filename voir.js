@@ -22,12 +22,7 @@
           this.$emit("action",{type:name,data:data});
         }
       },
-      createStore: function(){
-      	var initialState = arguments[0];
-      	var mutators = [];
-        for(var i = 1; i < arguments.length; i++){
-        	mutators.push(arguments[i]);
-        }
+      createStore: function(initialState,mutators){
         var ret = {
         	state:initialState,
           dispatchAction: function(action){

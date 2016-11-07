@@ -46,13 +46,13 @@ function counterMutations(state,action){
 Great! Now lets put our mutations and state together in a store that can expose our state and the ability to change it to others.
 
 ```javascript
-var store = Voir.createStore(state,counterMutations);
+var store = Voir.createStore(state,[counterMutations]);
 ```
 
 it's easy to add more mutation handlers if we want them
 
 ```javascript
-var store = Voir.createStore(state,counterMutations,otherMutationHandler,...);
+var store = Voir.createStore(state,[counterMutations,otherMutationHandler,...]);
 ```
 
 ### Connect store to Vue
@@ -127,7 +127,7 @@ var demo = new Vue({
     }
   }
 
-  var store = Voir.createStore({ counter: 0 }, counterMutations);
+  var store = Voir.createStore({ counter: 0 }, [counterMutations]);
 
   Vue.use(Voir,{store:store});
 
