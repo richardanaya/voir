@@ -1,6 +1,6 @@
 # Voir
 
-Voir is an incredibly simple store for keeping your mutations separate from your view components in Vue.
+Voir is an incredibly simple store for keeping your mutations separate from your view components in Vue.js
 
 ##Install
 
@@ -25,20 +25,20 @@ Let's start by creating the state for our app.
 var state = { counter: 0 };
 ```
 
-Next lets focus on the types of mutations we want to perform on this state.  In Voir we separate out mutations into their own functions:
+Next let's focus on the types of mutations we want to perform on this state.  In Voir we separate out mutations into their own functions:
 
 ```javascript
 function counterMutations(state,action){
   	switch(action.type){
     	case "increment":
-        state.counter += 1
-        return;
+          state.counter += 1
+          return;
   		case "decrement":
-        state.counter -= 1
-        return;
+          state.counter -= 1
+          return;
   		case "change":
-        state.counter = action.data.number;
-        return;        
+          state.counter = action.data.number;
+          return;        
     }
   }
 ```
@@ -116,14 +116,14 @@ var demo = new Vue({
   function counterMutations(state,action){
     switch(action.type){
         case "increment":
-          state.counter += 1
-          return;
+            state.counter += 1
+            return;
         case "decrement":
-          state.counter -= 1
-          return;
+            state.counter -= 1
+            return;
         case "change":
-          state.counter = action.data.number;
-          return;
+            state.counter = action.data.number;
+            return;
     }
   }
 
