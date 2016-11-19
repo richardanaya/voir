@@ -26,6 +26,7 @@
       },
       createStore: function(initialState,mutators){
         var ret = {
+          isDispatching:false,
         	state:initialState,
           subscribers:[],
           subscribe: function(fn){
@@ -43,12 +44,17 @@
             ret.vue._data.state = state
           },
           dispatchAction: function(action){
+            if(ret.isDispatching === true){
+              throw Error("Dispatching an action while dispatch in progress is not allowed")
+            }
+            ret.isDispatching = true;
           	for(var j = 0 ; j < mutators.length; j++){
             	mutators[j](ret.state,action,function(name,data){
                 var n = name.split(":");
                 ret.dispatchAction({type:n[0],data:data,message:n[1]});
               });
             }
+            ret.isDispatching = false;
             ret.notify(action);
           }
         };
