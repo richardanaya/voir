@@ -1,8 +1,8 @@
-
-![voir](https://richardanaya.github.io/voir/voir.png)
 # Voir
 
 Voir is an incredibly simple store for keeping your mutations separate from your view components in Vue.js
+
+![voir](https://richardanaya.github.io/voir/voir.png)
 
 ##Install
 
