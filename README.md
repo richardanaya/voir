@@ -113,7 +113,7 @@ Dispatching asynchronous in Voir is conventionally done by dispatching new actio
 </div>
 ```
 ```javascript
-function counterMutations(state,action){
+function counterMutations(state,action,dispatch){
   	switch(action.type){
     	case "increment":
           state.counter += 1
