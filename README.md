@@ -81,9 +81,9 @@ Dispatching actions in Voir is easy:
 ```html
 <div id="demo">
       {{state.counter}}
-      <button v-on:click="action('increment')">+</button>
-      <button v-on:click="action('decrement')">-</button>
-      <button v-on:click="action('change',{number:0})">Reset</button>
+      <button v-on:click="dispatch('increment')">+</button>
+      <button v-on:click="dispatch('decrement')">-</button>
+      <button v-on:click="dispatch('change',{number:0})">Reset</button>
 </div>
 ```
 ```javascript
@@ -96,6 +96,48 @@ var demo = new Vue({
 })
 ```
 
+
+### Dispatching Asynchronous Actions
+
+Dispatching asynchronous in Voir is conventionally done by dispatching new actions. This encourages reuse and also isolated steps that can be observed easily in Redux DevTools (see below).
+
+```html
+<div id="demo">
+      {{state.counter}}
+      <button v-on:click="dispatch('increment')">+</button>
+      <button v-on:click="dispatch('decrement')">-</button>
+      <button v-on:click="dispatch('change',{number:0})">Reset</button>
+      <button v-on:click="dispatch('step')">Step</button>
+</div>
+```
+```javascript
+function counterMutations(state,action){
+  	switch(action.type){
+    	case "increment":
+          state.counter += 1
+          return;
+
+      ...
+
+      case "step":
+          state.counter += 1
+          setTimeout(function(){
+            dispatch("increment:stepping first time");
+            setTimeout(function(){
+              dispatch("increment:stepping second time");
+            },1000)
+          },1000)
+          return;     
+    }
+  }
+```
+
+Notice how comments can be added to an action on dispatch, allowing better logging in Redux DevTools.
+
+#Redux DevTools
+
+Voir currently has support for logging through Redux DevTools. For more instructions on installing your dev tools, checkout https://github.com/gaearon/redux-devtools
+
 ### Complete
 
 ```html
@@ -107,13 +149,14 @@ var demo = new Vue({
 <body>
   <div id="demo">
       <p>{{state.counter}}</p>
-      <button v-on:click="action('increment')">+</button>
-      <button v-on:click="action('decrement')">-</button>
-      <button v-on:click="action('change',{number:0})">Reset</button>
+      <button v-on:click="dispatch('increment')">+</button>
+      <button v-on:click="dispatch('decrement')">-</button>
+      <button v-on:click="dispatch('change',{number:0})">Reset</button>
+      <button v-on:click="dispatch('step')">Step</button>
   </div>
 </body>
 <script>
-  function counterMutations(state,action){
+  function counterMutations(state,action,dispatch){
     switch(action.type){
         case "increment":
             state.counter += 1
@@ -123,6 +166,15 @@ var demo = new Vue({
             return;
         case "change":
             state.counter = action.data.number;
+            return;
+        case "step":
+            state.counter += 1
+            setTimeout(function(){
+              dispatch("increment:stepping first time");
+              setTimeout(function(){
+                dispatch("increment:stepping second time");
+              },1000)
+            },1000)
             return;
     }
   }

@@ -1,18 +1,19 @@
 <html>
 <head>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.5/vue.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.5/vue.js"></script>
   <script src="voir.js"></script>
 </head>
 <body>
   <div id="demo">
       <p>{{state.counter}}</p>
-      <button v-on:click="action('increment')">+</button>
-      <button v-on:click="action('decrement')">-</button>
-      <button v-on:click="action('change',{number:0})">Reset</button>
+      <button v-on:click="dispatch('increment')">+</button>
+      <button v-on:click="dispatch('decrement')">-</button>
+      <button v-on:click="dispatch('change',{number:0})">Reset</button>
+      <button v-on:click="dispatch('step')">Step</button>
   </div>
 </body>
 <script>
-  function counterMutations(state,action){
+  function counterMutations(state,action,dispatch){
     switch(action.type){
         case "increment":
           state.counter += 1
@@ -23,6 +24,16 @@
         case "change":
           state.counter = action.data.number;
           return;
+        case "step":
+            state.counter += 1
+            setTimeout(function(){
+              dispatch("increment:stepping first time");
+              setTimeout(function(){
+                dispatch("increment:stepping second time");
+              },1000)
+            },1000)
+            return;
+
     }
   }
 
