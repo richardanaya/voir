@@ -14,10 +14,7 @@
             options.store.vue = this;
           }
         })
-        Vue.prototype.dispatch = function (name,data) {
-          var n = name.split(":");
-          options.store.dispatchAction({type:n[0],data:data,message:n[1]});
-        }
+        Vue.prototype.dispatch = options.store.dispatch;
       },
       createStore: function(initialState,mutators){
         var ret = {
@@ -38,16 +35,17 @@
           setState:function(state){
             ret.vue._data.state = state
           },
-          dispatchAction: function(action){
+          dispatch: function(name,data){
+            var n = name.split(":");
+            ret.processAction({type:n[0],data:data,message:n[1]});
+          },
+          processAction: function(action){
             if(ret.isDispatching === true){
               throw Error("Dispatching an action while dispatch in progress is not allowed")
             }
             ret.isDispatching = true;
           	for(var j = 0 ; j < mutators.length; j++){
-            	mutators[j](ret.state,action,function(name,data){
-                var n = name.split(":");
-                ret.dispatchAction({type:n[0],data:data,message:n[1]});
-              });
+            	mutators[j](ret.state,action,ret.dispatch);
             }
             ret.isDispatching = false;
             ret.notify(action);
@@ -67,7 +65,7 @@
             } else if (message.type === 'STOP') {
               isStarted = false;
             } else if (message.type === 'ACTION') { // Received a store action from Dispatch monitor
-              store.dispatchAction(JSON.parse(message.payload));
+              store.processAction(JSON.parse(message.payload));
             } else if (message.type === 'DISPATCH' && message.payload.type === "JUMP_TO_STATE") { // Received a store action from Dispatch monitor
               var state = JSON.parse(message.state);
               debugger;
