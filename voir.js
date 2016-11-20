@@ -12,16 +12,11 @@
         Vue.mixin({
           created: function(){
             options.store.vue = this;
-            if(this.$root === this){
-              this.$on("action",function(d){
-        				options.store.dispatchAction(d);
-              });
-            }
           }
         })
         Vue.prototype.dispatch = function (name,data) {
           var n = name.split(":");
-          this.$emit("action",{type:n[0],data:data,message:n[1]});
+          options.store.dispatchAction({type:n[0],data:data,message:n[1]});
         }
       },
       createStore: function(initialState,mutators){
@@ -73,6 +68,13 @@
               isStarted = false;
             } else if (message.type === 'ACTION') { // Received a store action from Dispatch monitor
               store.dispatchAction(JSON.parse(message.payload));
+            } else if (message.type === 'DISPATCH' && message.payload.type === "JUMP_TO_STATE") { // Received a store action from Dispatch monitor
+              var state = JSON.parse(message.state);
+              debugger;
+              ret.vue.$data.state = state;
+            } else if (message.type === 'DISPATCH' && message.payload.type === "TOGGLE_ACTION") { // Received a store action from Dispatch monitor
+              var state = JSON.parse(message.state);
+              debugger;
             }
           });
 
