@@ -2,6 +2,11 @@
 
 Voir is an incredibly simple store for keeping your mutations separate from your view components in Vue.js
 
+##Features
+* Minimal code changes to add new action behavior
+* ES5 friendly api
+* Redux Devtool support
+
 ##Install
 
 npm:
