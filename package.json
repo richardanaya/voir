@@ -1,6 +1,6 @@
 {
   "name": "voir",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "A simple store for VueJS",
   "main": "voir.js",
   "repository": {
