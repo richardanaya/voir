@@ -140,6 +140,14 @@ Notice how comments can be added to an action on dispatch, allowing better loggi
 
 Voir currently has support for logging through Redux DevTools. For more instructions on installing your dev tools, checkout https://github.com/gaearon/redux-devtools
 
+### Dispatching actions directly on the store
+
+You may have scenerios that you desire to modify the store directly
+
+```javascript
+store.dispatch("increment");
+```
+
 ### Complete
 
 ```html
@@ -195,3 +203,5 @@ Voir currently has support for logging through Redux DevTools. For more instruct
 </html>
 
 ```
+
+See this demo at: https://richardanaya.github.io/voir/demo.html
