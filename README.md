@@ -2,8 +2,6 @@
 
 Voir is an incredibly simple store for keeping your mutations separate from your view components in Vue.js
 
-![voir](https://richardanaya.github.io/voir/voir.png)
-
 ##Install
 
 npm:
@@ -205,3 +203,5 @@ Voir currently has support for logging through Redux DevTools. For more instruct
 ```
 
 See this demo at: https://richardanaya.github.io/voir/demo.html
+
+![voir](https://richardanaya.github.io/voir/voir.png)
