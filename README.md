@@ -1,3 +1,6 @@
+
+<p align="center"><img width=150 src="https://richardanaya.github.io/voir/voir.png"></p>
+
 # Voir
 
 Voir is a minimalistic routing system for templated pages in single page applications. I have observed there are three basic operations that occur during the page lifecycle.
@@ -67,4 +70,3 @@ class CounterPageRoute extends PageRoute {
 
 See this demo at: https://richardanaya.github.io/voir/demo.html
 
-![voir](https://richardanaya.github.io/voir/voir.png)
