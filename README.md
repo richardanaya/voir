@@ -1,11 +1,28 @@
 # Voir
 
-Voir is an incredibly simple store for keeping your mutations separate from your view components in Vue.js
+Voir is a minimalistic routing system for templated pages in single page applications. I have observed there are three basic operations that occur during the page lifecycle.
 
-##Features
-* Minimal code required to add new action behavior
-* ES5 friendly api
-* Redux Devtool support
+* initial loading on visitation of a route
+* setting of page state on navigation to a route
+* rendering and rerendering of a current route
+
+This library makes it easy to do this.
+
+```javascript
+class MyPageRoute extends PageRoute {
+  async function onInit(params){
+  	// perform some operation on first load
+  }
+  
+  async function onLoad(params){
+  	// perform some operation when navigated to
+  }
+  
+  async function onRender(){
+  	// render from session state and view state
+  }
+ }
+```
 
 ##Install
 
