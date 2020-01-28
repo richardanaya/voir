@@ -41,12 +41,19 @@ CDN:
 
 We're going to create a simple counter application.  
 
-### Make a store
+First let's import [`lit-html`](https://lit-html.polymer-project.org/) and voir
+
+```javascript
+import {html, render} from 'https://unpkg.com/lit-html?module';
+import {PageRoute} from 'https://unpkg.com/voir?module';
+```
+
 Let's start by creating the session state for our app.
 
 ```javascript
 var session = { counter: 0 };
 ```
+
 Now lets think about its lifecycle a bit
 
 ```javascript
