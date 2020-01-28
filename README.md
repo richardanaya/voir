@@ -62,7 +62,9 @@ class CounterPageRoute extends PageRoute {
   }
   
   function onAdd() {
+    // modify state
     session.counter += 1;
+    // rerender current page
     this.renderCurrentPage();
   }
 }
