@@ -3,9 +3,9 @@
 
 # Voir
 
-Voir is a minimalistic routing system for templated pages in single page applications. I have observed there are three basic operations that occur during the page lifecycle.
+Voir is a minimalistic routing/rendering system for single page applications. I have observed there are three basic operations that occur during the page lifecycle.
 
-* initial loading on visitation of a route
+* initial loading on first visit of a route
 * setting of page state on navigation to a route
 * rendering and rerendering of a current route
 
