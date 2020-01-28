@@ -46,7 +46,7 @@ var session = { counter: 0 };
 ```
 Now lets think about its lifecycle a bit
 
-```
+```javascript
 class CounterPageRoute extends PageRoute {
   constructor() {
     // all pages route to counter
