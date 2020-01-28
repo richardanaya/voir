@@ -63,6 +63,7 @@ class CounterPageRoute extends PageRoute {
     this.renderCurrentPage();
   }
 }
+```
 
 See this demo at: https://richardanaya.github.io/voir/demo.html
 
