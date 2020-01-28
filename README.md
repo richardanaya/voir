@@ -31,23 +31,11 @@ class MyPageRoute extends PageRoute {
  }
 ```
 
-## Install
-CDN:
-```html
-<script src="https://unpkg.com/voir@latest/voir.js"></script>
-```
-
-or
-ES Module:
-```
-import {html, render} from 'https://unpkg.com/lit-html?module';
-```
-
 ## Usage
 
 We're going to create a simple counter application.  
 
-First let's import [`lit-html`](https://lit-html.polymer-project.org/) and voir
+First let's import [`lit-html`](https://lit-html.polymer-project.org/) and voir as ES modules
 
 ```javascript
 import {html, render} from 'https://unpkg.com/lit-html?module';
