@@ -39,7 +39,7 @@ First let's import [`lit-html`](https://lit-html.polymer-project.org/) and voir 
 
 ```javascript
 import {html, render} from 'https://unpkg.com/lit-html?module';
-import {PageRoute} from 'https://unpkg.com/voir?module';
+import {PageRoute} from 'https://cdn.jsdelivr.net/gh/richardanaya/voir@latest/voir.js';
 ```
 
 Let's start by creating the session state for our app.
