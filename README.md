@@ -10,6 +10,10 @@ This library makes it easy to do this.
 
 ```javascript
 class MyPageRoute extends PageRoute {
+  constructor() {
+    super("/blog/:postId")
+  }
+  
   async function onInit(params){
   	// perform some operation on first load
   }
@@ -24,13 +28,7 @@ class MyPageRoute extends PageRoute {
  }
 ```
 
-##Install
-
-npm:
-```bash
-npm install voir
-```
-
+## Install
 CDN:
 ```html
 <script src="https://unpkg.com/voir@latest/voir.js"></script>
