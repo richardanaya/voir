@@ -58,7 +58,7 @@ class CounterPageRoute extends PageRoute {
 
   async function onRender(){
     // use lit to render to content holder
-  	render(document.body, html`<div>${session.counter}<button onclick="${this.onAdd}">+</button></div>`
+    render(document.body, html`<div>${session.counter}<button onclick="${this.onAdd}">+</button></div>`
   }
   
   function onAdd() {
