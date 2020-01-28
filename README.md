@@ -37,6 +37,12 @@ CDN:
 <script src="https://unpkg.com/voir@latest/voir.js"></script>
 ```
 
+or
+ES Module:
+```
+import {html, render} from 'https://unpkg.com/lit-html?module';
+```
+
 ## Usage
 
 We're going to create a simple counter application.  
