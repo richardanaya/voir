@@ -2,49 +2,58 @@
 <body>
 </body>
 <script type="module">
-import {html, render} from 'https://unpkg.com/lit-html?module';
-import {PageRoute,register} from './voir.js';
+import { html, render } from "https://unpkg.com/lit-html?module";
+import { PageRoute, register } from "./voir.js";
 
 var session = { counter: 0 };
 
 class CounterPageRoute extends PageRoute {
   constructor() {
     // all pages route to counter
-    super("/*")
+    super("/*");
   }
 
-  async onRender(){
+  async onRender() {
     // use lit to render to content holder
-    render(html`<div>${session.counter}<button @click=${this.onAdd.bind(this)}>+</button></div>`,document.body)
+    render(
+      html`
+        <div>
+          ${session.counter}<button @click=${this.onAdd.bind(this)}>+</button>
+        </div>
+      `,
+      document.body
+    );
   }
 
   onAdd() {
     // modify state
     session.counter += 1;
-    if(session.counter == 3){
-      this.navigate("/foo")
+    if (session.counter == 3) {
+      this.navigate("/foo");
     }
     // rerender current page
     this.renderCurrentPage();
-  } 
+  }
 }
 
 class FooPageRoute extends PageRoute {
   constructor() {
     // all pages route to counter
-    super("/foo")
+    super("/foo");
   }
 
-  async onRender(){
+  async onRender() {
     // use lit to render to content holder
-    render(html`<div>you made it to foo <a href="/demo.html">go back</a></div>`,document.body)
+    render(
+      html`
+        <div>you made it to foo <a href="/demo.html">go back</a></div>
+      `,
+      document.body
+    );
   }
 }
 
 // register the page routes in the order we'd like them evaluated
-register([
-  FooPageRoute,
-  CounterPageRoute,
-])
+register([FooPageRoute, CounterPageRoute]);
 </script>
 </html>
