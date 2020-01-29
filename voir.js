@@ -5,6 +5,7 @@ class Router {
   constructor(options) {
     window.addEventListener("load",()=>{
       this.listen();
+      this.routeCheck();
     })
   }
 
