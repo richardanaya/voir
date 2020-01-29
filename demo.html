@@ -21,14 +21,30 @@ class CounterPageRoute extends PageRoute {
   onAdd() {
     // modify state
     session.counter += 1;
+    if(session.counter == 3){
+      this.navigate("/foo")
+    }
     // rerender current page
     this.renderCurrentPage();
   } 
 }
 
+class FooPageRoute extends PageRoute {
+  constructor() {
+    // all pages route to counter
+    super("/foo")
+  }
+
+  async onRender(){
+    // use lit to render to content holder
+    render(html`<div>you made it to foo <a href="/demo.html">go back</a></div>`,document.body)
+  }
+}
+
 // register the page routes in the order we'd like them evaluated
 register([
-  CounterPageRoute
+  FooPageRoute,
+  CounterPageRoute,
 ])
 </script>
 </html>
