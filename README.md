@@ -14,11 +14,14 @@ This library makes it easy to do this.
 ```javascript
 class MyPageRoute extends PageRoute {
   constructor() {
-    super("/blog/(?<postId>*)")
+    super("/blog/(?<postId>.*)")
   }
   
   async function onInit(){
-  	// perform some operation on first load
+    // perform some operation on first load
+
+    // get paramters from route regex match
+    const pageId = this.match.groups.test;
   }
   
   async function onLoad(){
