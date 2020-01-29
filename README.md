@@ -20,16 +20,16 @@ class MyPageRoute extends PageRoute {
   async function onInit(){
     // perform some operation on first load
 
-    // get paramters from route regex match
-    const pageId = this.match.groups.test;
+    // get parameters from route regex match
+    const pageId = this.match.groups.postId;
   }
   
   async function onLoad(){
-  	// perform some operation when navigated to
+    // perform some operation when navigated to
   }
   
   async function onRender(){
-  	// render from session state and view state
+    // render from session state and view state
   }
  }
 ```
