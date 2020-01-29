@@ -1,7 +1,7 @@
 {
   "name": "voir",
-  "version": "1.0.11",
-  "description": "A simple store for VueJS",
+  "version": "1.1.0",
+  "description": "A router for lit-html",
   "main": "voir.js",
   "repository": {
     "type": "git",
