@@ -7,7 +7,7 @@ Voir is a minimalistic routing/rendering system for single page applications. I 
 
 * initial loading on first visit of a route
 * setting of page state on navigation to a route
-* rendering and rerendering of a current route
+* rendering and rerendering of a current route on interations
 
 This library makes it easy to do this.
 
