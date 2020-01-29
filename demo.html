@@ -1,51 +1,33 @@
 <html>
-<head>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.5/vue.js"></script>
-  <script src="voir.js"></script>
-</head>
 <body>
-  <div id="demo">
-      <p>{{state.counter}}</p>
-      <button v-on:click="dispatch('increment')">+</button>
-      <button v-on:click="dispatch('decrement')">-</button>
-      <button v-on:click="dispatch('change',{number:0})">Reset</button>
-      <button v-on:click="dispatch('step')">Step</button>
-  </div>
 </body>
-<script>
-  function counterMutations(state,action,dispatch){
-    switch(action.type){
-        case "increment":
-          state.counter += 1
-          return;
-        case "decrement":
-          state.counter -= 1
-          return;
-        case "change":
-          state.counter = action.data.number;
-          return;
-        case "step":
-            state.counter += 1
-            setTimeout(function(){
-              dispatch("increment:stepping first time");
-              setTimeout(function(){
-                dispatch("increment:stepping second time");
-              },1000)
-            },1000)
-            return;
+<script type="module">
+import {html, render} from 'https://unpkg.com/lit-html?module';
+import {PageRoute,register} from './voir.js';
 
-    }
+var session = { counter: 0 };
+
+class CounterPageRoute extends PageRoute {
+  constructor() {
+    // all pages route to counter
+    super("/*")
   }
 
-  var store = Voir.createStore({ counter: 0 }, [counterMutations]);
+  async onRender(){
+    // use lit to render to content holder
+    render(html`<div>${session.counter}<button @click=${this.onAdd.bind(this)}>+</button></div>`,document.body)
+  }
 
-  Vue.use(Voir,{store:store});
+  onAdd() {
+    // modify state
+    session.counter += 1;
+    // rerender current page
+    this.renderCurrentPage();
+  } 
+}
 
-  var demo = new Vue({
-      el: '#demo',
-      data:{
-        state: store.state
-      }
-  })
+register([
+  CounterPageRoute
+])
 </script>
 </html>

@@ -1,90 +1,93 @@
-(function (root, factory) {
-    if (typeof define === 'function' && define.amd) {
-        define([], factory);
-    } else if (typeof module === 'object' && module.exports) {
-        module.exports = factory();
-    } else {
-        root.Voir = factory();
+class Router {
+  routes = [];
+  root = '/';
+
+  constructor(options) {
+    window.addEventListener("load",()=>{
+      this.listen();
+    })
   }
-}(this, function () {
-    return {
-      install: function(Vue, options){
-        Vue.mixin({
-          created: function(){
-            options.store.vue = this;
-          }
-        })
-        Vue.prototype.dispatch = options.store.dispatch;
-      },
-      createStore: function(initialState,mutators){
-        var ret = {
-          isDispatching:false,
-        	state:initialState,
-          subscribers:[],
-          subscribe: function(fn){
-            ret.subscribers.push(fn);
-          },
-          notify:function(action){
-            for(var i=0;i<ret.subscribers.length;i++){
-              ret.subscribers[i](action,ret.getState())
-            }
-          },
-          getState:function(){
-            return ret.state;
-          },
-          setState:function(state){
-            ret.vue._data.state = state
-          },
-          dispatch: function(name,data){
-            var n = name.split(":");
-            ret.processAction({type:n[0],data:data,message:n[1]});
-          },
-          processAction: function(action){
-            if(ret.isDispatching === true){
-              throw Error("Dispatching an action while dispatch in progress is not allowed")
-            }
-            ret.isDispatching = true;
-          	for(var j = 0 ; j < mutators.length; j++){
-            	mutators[j](ret.state,action,ret.dispatch);
-            }
-            ret.isDispatching = false;
-            ret.notify(action);
-          }
-        };
 
-        let isStarted = false;
-        let isJump = false;
+  add(path, cb) {
+    this.routes.push({ path, cb });
+  }
 
-        if(window && window.__REDUX_DEVTOOLS_EXTENSION__){
-          const devTools = window.__REDUX_DEVTOOLS_EXTENSION__.connect();
-          devTools.subscribe((message) => {
-            if (message.type === 'START') {
-              isStarted = true;
-              var state = JSON.parse(JSON.stringify(ret.getState()));
-              devTools.init(state)
-            } else if (message.type === 'STOP') {
-              isStarted = false;
-            } else if (message.type === 'ACTION') { // Received a store action from Dispatch monitor
-              store.processAction(JSON.parse(message.payload));
-            } else if (message.type === 'DISPATCH' && message.payload.type === "JUMP_TO_STATE") { // Received a store action from Dispatch monitor
-              var state = JSON.parse(message.state);
-              debugger;
-              ret.vue.$data.state = state;
-            } else if (message.type === 'DISPATCH' && message.payload.type === "TOGGLE_ACTION") { // Received a store action from Dispatch monitor
-              var state = JSON.parse(message.state);
-              debugger;
-            }
-          });
+  clearSlashes(path){
+    return path.toString()
+    .replace(/\/$/, '')
+    .replace(/^\//, '');
+  }
 
-          ret.subscribe((action,state) => {
-            if (!isStarted) return;
-            var state = JSON.parse(JSON.stringify(ret.getState()));
-            action.type = action.type+(action.message?(":"+action.message):"")
-            devTools.send(action, store.getState());
-          });
-        }
+  getCurrentPath() {
+    let fragment = this.clearSlashes(decodeURI(window.location.pathname + window.location.search));
+    fragment = fragment.replace(/\?(.*)$/, '');
+    return this.clearSlashes(fragment)
+  };
 
-      	return ret;
+  navigate(path) {
+    window.history.pushState(null, null, this.root + this.clearSlashes(path));
+  };
+
+  listen() {
+    this.interval = setInterval(this.routeCheck.bind(this), 50);
+  };
+
+  routeCheck(){
+    let curPath = this.getCurrentPath();
+    if (this.current === curPath) return;
+    this.current = curPath;
+
+    this.routes.some(route => {
+      const match = this.current.match(route.path);
+      if (match) {
+        match.shift();
+        route.cb.call(null,match)
+        return match;
       }
-    };
-}));
+      return false;
+    });
+  };
+}
+
+const router = new Router();
+
+let currentPageRoute = null;
+
+export class PageRoute {
+  constructor(route){
+    this.firstTime = false;
+    this.router = router;
+    this.router.add(route,(match)=>{
+      currentPageRoute = this;
+      this.match = match;
+      if(this.onInit && !this.firstTime){
+        spawn(this.onInit);
+        this.firstTime = true;
+      }
+      if(this.onLoad){
+        spawn(this.onLoad);
+      }
+      if(this.onRender){
+        spawn(this.onRender)
+      }
+    })
+  }
+
+  renderCurrentPage() {
+    if(currentPageRoute && currentPageRoute.onRender){
+      currentPageRoute.onRender();
+    }
+  }
+}
+
+export function register(routes){
+  for(var i in routes){
+    new routes[i];
+  }
+}
+
+export function spawn(f){
+  f().then(()=>{
+      //executed
+  })
+}

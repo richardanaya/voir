@@ -14,14 +14,14 @@ This library makes it easy to do this.
 ```javascript
 class MyPageRoute extends PageRoute {
   constructor() {
-    super("/blog/:postId")
+    super("/blog/(?<postId>*)")
   }
   
-  async function onInit(params){
+  async function onInit(){
   	// perform some operation on first load
   }
   
-  async function onLoad(params){
+  async function onLoad(){
   	// perform some operation when navigated to
   }
   
@@ -30,6 +30,8 @@ class MyPageRoute extends PageRoute {
   }
  }
 ```
+
+Notice that the route paths are simply regex strings. You can take advantage of ES 2018 regex named groups for more expressive route matches.
 
 ## Usage
 
@@ -69,6 +71,15 @@ class CounterPageRoute extends PageRoute {
     this.renderCurrentPage();
   }
 }
+```
+
+Finally we register the page routes in the order we'd like them evaluated
+
+```javascript
+register([
+  CounterPageRoute
+  // other routes would go here
+])
 ```
 
 See this demo at: https://richardanaya.github.io/voir/demo.html
