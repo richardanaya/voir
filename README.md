@@ -20,8 +20,8 @@ class MyPageRoute extends PageRoute {
   async function onInit(){
     // perform some operation on first load
 
-    // get paramters from route regex match
-    const pageId = this.match.groups.test;
+    // get parameters from route regex match
+    const pageId = this.match.groups.postId;
   }
   
   async function onLoad(){
