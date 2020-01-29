@@ -5,7 +5,9 @@ class Router {
   constructor(options) {
     window.addEventListener("load",()=>{
       this.listen();
-      this.routeCheck();
+      setTimeout(()=>{
+        this.routeCheck();
+      },1);
     })
   }
 
@@ -27,6 +29,9 @@ class Router {
 
   navigate(path) {
     window.history.pushState(null, null, this.root + this.clearSlashes(path));
+    setTimeout(()=>{
+      this.routeCheck();
+    },1);
   };
 
   isExternal(path){
