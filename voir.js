@@ -19,14 +19,18 @@ class Router {
   }
 
   getCurrentPath() {
-    let fragment = this.clearSlashes(decodeURI(window.location.pathname + window.location.search));
+    let fragment = (decodeURI(window.location.pathname + window.location.search));
     fragment = fragment.replace(/\?(.*)$/, '');
-    return this.clearSlashes(fragment)
+    return (fragment)
   };
 
   navigate(path) {
     window.history.pushState(null, null, this.root + this.clearSlashes(path));
   };
+
+  isExternal(path){
+    return path.indexOf(window.location.origin) != 0;
+  }
 
   listen() {
     this.interval = setInterval(this.routeCheck.bind(this), 50);
@@ -61,14 +65,14 @@ export class PageRoute {
       currentPageRoute = this;
       this.match = match;
       if(this.onInit && !this.firstTime){
-        spawn(this.onInit);
+        spawn(this.onInit.bind(this));
         this.firstTime = true;
       }
       if(this.onLoad){
-        spawn(this.onLoad);
+        spawn(this.onLoad.bind(this));
       }
       if(this.onRender){
-        spawn(this.onRender)
+        spawn(this.onRender.bind(this))
       }
     })
   }
@@ -77,6 +81,10 @@ export class PageRoute {
     if(currentPageRoute && currentPageRoute.onRender){
       currentPageRoute.onRender();
     }
+  }
+
+  navigate(path){
+    router.navigate(path);
   }
 }
 
@@ -91,3 +99,13 @@ export function spawn(f){
       //executed
   })
 }
+
+document.addEventListener("click",function(e){
+  var el = e.target;
+  while (el && 'A' !== el.nodeName.toUpperCase()) el = el.parentNode;
+  if (!el || 'A' !== el.nodeName.toUpperCase()) return;
+  if(el && !router.isExternal(el.href)){
+    router.navigate(el.href.slice(window.location.origin.length))
+    e.preventDefault();
+  }
+})
